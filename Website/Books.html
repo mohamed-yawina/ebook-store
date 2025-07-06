@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Book Store</title>
+    <link rel="stylesheet" href="Books.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          document.body.style.zoom = "100%";
+        });
+      </script>
+</head>
+<body>
+    <section>
+        <nav>
+            <!-- Logo avec lien vers la page d'accueil -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/logo.png" alt="Logo">
+                    <span class="logo-title">E-Books</span>
+                </a>
+            </div>
+    
+    
+            <!-- Icônes (livre et utilisateur) -->
+            <div class="nav-icons">
+                <a href="index.html" class="icon"><i class="fas fa-home"></i></a>
+                <a href="contact.html" class="icon"><i class="fas fa-envelope"></i></a>
+                <a " class="icon" id="cartIcon">
+                    <i class="fa-solid fa-shopping-cart"></i> <!-- Icône de panier -->
+                    <span class="cart-count">0</span> <!-- Compteur d'articles -->
+                </a>
+                <a href="#" class="login-icon" id="loginButton">
+                    <i class="fas fa-user"></i> <!-- Icône de personne -->
+                </a>
+            </div>
+    
+            <!-- Menu déroulant pour l'utilisateur -->
+            <div class="dropdown" id="dropdownMenu" style="display: none;">
+                <a href="file:///C:/Users/Simo/Desktop/E-Book%20Store/Dashboard/SitePages/settings_user.html" id="accountButton"></a>
+                <a href="#" id="logoutButton">Déconnexion</a>
+            </div>
+        </nav>
+    </section>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const accountButton = document.getElementById('accountButton');
+        const logoutButton = document.getElementById('logoutButton');
+        const loginButton = document.getElementById('loginButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+    
+        // Mise à jour de l'affichage en fonction de l'état de connexion
+        if (isLoggedIn) {
+            accountButton.innerText = 'Mon Compte';
+            accountButton.addEventListener('click', function () {
+                alert('Accéder à Mon Compte'); // Redirigez vers la page de compte
+            });
+            logoutButton.style.display = 'block'; // Afficher le bouton de déconnexion
+        } else {
+            accountButton.innerText = 'Se Connecter';
+            accountButton.addEventListener('click', function () {
+                window.location.href = 'file:///C:/Users/Simo/Desktop/E-Book%20Store/login/login.html'; // Redirige vers la page de connexion
+            });
+            logoutButton.style.display = 'none'; // Masquer le bouton de déconnexion
+        }
+    
+        // Gestion du clic sur l'icône de connexion
+        loginButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+        });
+    
+        // Gestion de la déconnexion
+        logoutButton.addEventListener('click', function () {
+            // Supprimer toutes les données de session
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('authToken'); // Supprimer le token d'authentification
+            localStorage.removeItem('role'); // Supprimer le rôle de l'utilisateur
+            localStorage.removeItem('cartItems'); // Supprimer le panier (si nécessaire)
+    
+            // Rediriger l'utilisateur vers la page d'accueil
+            window.location.href = 'file:///C:/Users/Simo/Desktop/E-Book%20Store/Website/index.html';
+        });
+    });
+    </script>
+
+    <!-- Modal du panier -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart">&times;</span>
+            <h2>Votre Panier</h2>
+            <div id="cartItems"></div>
+            <p id="cartTotal">Total: 0 DH</p>
+            <button id="checkoutButton">Valider la commande</button>
+        </div>
+    </div>
+
+    <!-- Section principale -->
+    <main>
+        <h1>Nos Livres</h1>
+        <div class="books-grid">
+            <!-- Livre 1 -->
+            <div class="book-card">
+                <img src="image/arrival_1.jpg" alt="The Giver">
+                <h3>The Giver</h3>
+                <p class="price">45.99$</p>
+                <button class="add_to_cart_btn" data-id="1" data-title="The Giver" data-price="45.99" data-isbn="9780132350884">Ajouter au panier</button>
+            </div>
+
+            <!-- Livre 2 -->
+            <div class="book-card">
+                <img src="image/arrival_2.jpg" alt="The Wright Brothers">
+                <h3>The Wright Brothers</h3>
+                <p class="price">39.99$</p>
+                <button class="add_to_cart_btn" data-id="2" data-title="The Wright Brothers" data-price="39.99" data-isbn="9780201616224">Ajouter au panier</button>
+            </div>
+
+            <!-- Livre 3 -->
+            <div class="book-card">
+                <img src="image/arrival_3.jpg" alt="Radical Gardening">
+                <h3>Radical Gardening</h3>
+                <p class="price">59.99$</p>
+                <button class="add_to_cart_btn" data-id="3" data-title="Radical Gardening" data-price="59.99" data-isbn="978020162025">Ajouter au panier</button>
+            </div>
+
+            <!-- Livre 4 -->
+            <div class="book-card">
+                <img src="image/arrival_4.jpg" alt="Red Queen">
+                <h3>Red Queen</h3>
+                <p class="price">78.50$</p>
+                <button class="add_to_cart_btn" data-id="4" data-title="Red Queen" data-price="79.99" data-isbn="9780201616666">Ajouter au panier</button>
+            </div>
+            <!-- Livre 5 -->
+            <div class="book-card">
+                <img src="image/arrival_5.jpg" alt="Harper Lee">
+                <h3>Harper Lee</h3>
+                <p class="price">29.99$</p>
+                <button class="add_to_cart_btn" data-id="5" data-title="Harper Lee" data-price="29.99" data-isbn="9780201615555">Ajouter au panier</button>
+            </div>
+            <!-- Livre 6 -->
+            <div class="book-card">
+                <img src="image/arrival_6.jpg" alt="Harry Potter">
+                <h3>Harry Potter</h3>
+                <p class="price">49.99$</p>
+                <button class="add_to_cart_btn" data-id="6" data-title="Harry Potter" data-price="49.99" data-isbn="9780201615454">Ajouter au panier</button>
+            </div>
+            <!-- Livre 7 -->
+            <div class="book-card">
+                <img src="image/arrival_7.jpg" alt="Heroes of Olympus">
+                <h3>Heroes of Olympus</h3>
+                <p class="price">59.99$</p>
+                <button class="add_to_cart_btn" data-id="7" data-title="Heroes of Olympus" data-price="59.99" data-isbn="9780201617274">Ajouter au panier</button>
+            </div>
+            <!-- Livre 8 -->
+            <div class="book-card">
+                <img src="image/arrival_8.webp" alt="Squid Game">
+                <h3>Squid Game</h3>
+                <p class="price">39.99$</p>
+                <button class="add_to_cart_btn" data-id="8" data-title="Squid Game" data-price="39.99" data-isbn="9780201618284">Ajouter au panier</button>
+            </div>
+            <!-- Livre 9 -->
+            <div class="book-card">
+                <img src="image/arrival_9.jpg" alt="Ranger's Apprentice">
+                <h3>Ranger's Apprentice</h3>
+                <p class="price">25.99$</p>
+                <button class="add_to_cart_btn" data-id="9" data-title="Ranger's Apprentice" data-price="25.99" data-isbn="9780201619294">Ajouter au panier</button>
+            </div>
+            <!-- Livre 10 -->
+            <div class="book-card">
+                <img src="image/arrival_10.jpg" alt="Percy Jackson">
+                <h3>Persy Jackson</h3>
+                <p class="price">35.99$</p>
+                <button class="add_to_cart_btn" data-id="10" data-title="Persy Jackson" data-price="35.99" data-isbn="9780201611011">Ajouter au panier</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="book-card"></div>
+    <div class="book-card"></div>
+
+    <footer>
+        <p>&copy; 2024 E-Book Store. Tous droits réservés.</p>
+    </footer>
+
+    <script src="Books.js"></script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Books - Dashboard</title>
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/line-awesome.min.css">
+    <link rel="stylesheet" href="../SiteAssets/css/pages/layout.css">
+    <link rel="stylesheet" href="../SiteAssets/css/pages/dashboard.css">
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/Chart.min.css">
+    <link rel="icon" href="../../doclab-master/favicon.svg">
+    <script src="../SiteAssets/js/vendors/jquery.min.js"></script>
+    <script src="../SiteAssets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../SiteAssets/js/vendors/Chart.bundle.min.js"></script>
+    <script src="../SiteAssets/js/global.js"></script>
+    <script src="../SiteAssets/js/dashboard.js"></script>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-spinner"></div>
+  </div>
+  <style>
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loader-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        const loader = document.getElementById("loader");
+        loader.style.display = "none";
+      }, 1000);
+    });
+  </script>
+
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+      <a class="navbar-brand" href="dashboard.html">
+        <img src="logo.png" alt="Doclab Logo">
+        <span>E-Book Store</span>
+      </a>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown dropleft">
+            <a class="nav-link notification-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">3</span>
+              <i class="las la-bell"></i>
+            </a>
+            <div class="dropdown-menu notification-dropdown-menu shadow-lg" aria-labelledby="notification-dropdown">
+              <div class="dropdown-title">
+                <a href="#">Notifications <span class="ml-2 notifications-count">(3)</span></a>
+                <a class="float-right" href="#">Mark all as read</a>
+              </div>
+              <div class="dropdown-body">
+                <ul class="list-unstyled">
+                  <li class="media">
+                    <a class="notification-card" href="#">
+                      <img class="mr-3" src="../SiteAssets/images/inbox.svg" alt="Notification Icon">
+                      <div class="media-body">
+                        <h6 class="mt-0 mb-1">Collaboration tools available</h6>
+                        <p>Cras sit amet nibh libero, in gravida nulla.</p>
+                        <small class="text-muted">10.01.2025, 13:02</small>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <span class="vertical-divider"></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle" src="./admin.png" alt="Profile Picture">
+              <span class="d">ADMIN</span>
+            </a>
+            <div class="dropdown">
+              <div class="dropdown-menu shadow-lg profile-dropdown-menu" aria-labelledby="profile-dropdown">
+                <a class="dropdown-item" href="file:///C:/Users/Simo/Desktop/E-Book%20Store/Website/index.html">
+                  <i class="las la-globe mr-2"></i>Mon website
+                </a>
+                <a class="dropdown-item" href="settings_staff.html">
+                  <i class="las la-cog mr-2"></i>Settings
+                </a>
+                <a href="file:///C:/Users/Simo/Desktop/E-Book%20Store/login/login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Main Content Section -->
+  <main>
+    <div class="side-nav">
+      <ul class="list-group list-group-flush">
+        <a class="list-group-item" href="dashboard.html" data-toggle="tooltip" data-placement="bottom" title="Dashboard">
+          <i class="las la-shapes la-lw"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="list-group-item" href="Clients.html" data-toggle="tooltip" data-placement="bottom" title="Patients">
+          <i class="las la-user-injured la-lw"></i>
+          <span>Clients</span>
+        </a>
+        <a class="list-group-item" href="Books.html" data-toggle="tooltip" data-placement="bottom" title="Specialists">
+          <i class="las la-book la-lw"></i>
+          <span>Books</span>
+        </a>
+        <a class="list-group-item" href="Commande.html" data-toggle="tooltip" data-placement="bottom" title="Procurement">
+          <i class="las la-shopping-cart la-lw"></i>
+          <span>Orders</span>
+        </a>
+        <a class="list-group-item active" href="Staff.html" data-toggle="tooltip" data-placement="bottom" title="Staff">
+          <i class="las la-users la-lw"></i>
+          <span>Staff</span>
+        </a>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="container-fluid">
+      <div class="section title-section">
+        <h5 class="page-title">Staff</h5>
+      </div>
+      <div class="section filters-section d-flex justify-content-between align-items-center">
+        <div class="dropdowns-wrapper d-flex">
+            <div class="dropdown mr-2">
+                <a class="btn btn-dark-red-o dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</a>
+                <div class="dropdown-menu shadow-lg">
+                    <a class="dropdown-item" href="#">Matricule</a>
+                    <a class="dropdown-item" href="#">Full Name</a>
+                    <a class="dropdown-item" href="#">Email</a>
+                    <a class="dropdown-item" href="#">Phone Number</a>
+                    <a class="dropdown-item" href="#">Address</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a class="btn btn-dark-red-o dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</a>
+                <div class="dropdown-menu shadow-lg">
+                    <a class="dropdown-item" href="#">Matricule</a>
+                    <a class="dropdown-item" href="#">Full Name</a>
+                    <a class="dropdown-item" href="#">Gender</a>
+                    <a class="dropdown-item" href="#">Email</a>
+                    <a class="dropdown-item" href="#">Phone Number</a>
+                    <a class="dropdown-item" href="#">Address</a>
+                </div>
+            </div>
+        </div>
+        <div class="buttons-wrapper">
+            <button class="btn btn-dark-red-f-gr" data-toggle="modal" data-target="#addSpecialistModal">
+                <i class="las la-plus-circle"></i> Add New Staff
+            </button>
+        </div>
+    </div>
+     <div class="section specialists-table-view">
+        <table class="table table-hover table-responsive-lg">
+        <thead>
+          <tr>
+          <th>Matricule</th>
+          <th>Full Name</th>
+          <th>Gender</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Adress</th>
+          <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Specialists will be loaded here from JSON -->
+        </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+    </main>
+
+    <!-- Add Specialist Modal -->
+    <div class="modal fade" id="addSpecialistModal" tabindex="-1" role="dialog" aria-labelledby="addSpecialistModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSpecialistModalLabel">Add New Staff</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addSpecialistForm">
+          <div class="form-group">
+            <label for="specialization">Full Name</label>
+            <input type="text" class="form-control" id="specialization" required>
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <input type="text" class="form-control" id="gender" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" required>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" class="form-control" id="address" required>
+          </div>
+          <button type="submit" class="btn btn-dark-red-f">Add Staff</button>
+        </form>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- Edit Specialist Modal -->
+    <div class="modal fade" id="editSpecialistModal" tabindex="-1" role="dialog" aria-labelledby="editSpecialistModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editSpecialistModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editSpecialistForm">
+          <input type="hidden" id="editSpecialistId">
+          <div class="form-group">
+            <label for="editSpecialization">Full Name</label>
+            <input type="text" class="form-control" id="editSpecialization" required>
+          </div>
+          <div class="form-group">
+            <label for="editGender">Gender</label>
+            <input type="text" class="form-control" id="editGender" required>
+          </div>
+          <div class="form-group">
+            <label for="editEmail">Email</label>
+            <input type="email" class="form-control" id="editEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="editPhone">Phone Number</label>
+            <input type="text" class="form-control" id="editPhone" required>
+          </div>
+          <div class="form-group">
+            <label for="editAddress">Address</label>
+            <input type="text" class="form-control" id="editAddress" required>
+          </div>
+          <button type="submit" class="btn btn-dark-red-f">Save</button>
+        </form>
+      </div>
+      </div>
+    </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+    let users = []; // Variable globale pour stocker les utilisateurs
+
+    // Charger les utilisateurs depuis l'API
+    function loadUsers() {
+        fetch('http://localhost:3000/users')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Données chargées depuis l'API :", data); // Afficher les données dans la console
+                if (Array.isArray(data)) {
+                    users = data.filter(user => user.role === "admin"); // Filtrer les utilisateurs avec le rôle "admin"
+                } else if (data.users && Array.isArray(data.users)) {
+                    users = data.users.filter(user => user.role === "admin"); // Filtrer les utilisateurs avec le rôle "admin"
+                } else {
+                    console.error('La structure des données est invalide :', data);
+                    return;
+                }
+                displayUsers(); // Afficher les utilisateurs filtrés
+            })
+            .catch(error => console.error('Erreur lors du chargement du fichier JSON :', error));
+    }
+
+    // Afficher les utilisateurs dans le tableau
+    function displayUsers() {
+        $('table tbody').empty(); // Vider le tableau avant d'ajouter de nouvelles données
+
+        // Ajouter les utilisateurs filtrés au tableau
+        users.forEach(function (user) {
+            addUserToTable(user);
+        });
+    }
+
+    // Ajouter un utilisateur au tableau
+    function addUserToTable(user) {
+        const newRow = `
+            <tr data-id="${user.id}">
+                <td>${user.id}</td>
+                <td>${user.specialization}</td>
+                <td>${user.gender}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${user.address}</td>
+                <td>
+                    <button class="btn btn-sm btn-dark-red-f-gr edit-staff" data-toggle="modal" data-target="#editSpecialistModal">Edit</button>
+                    <button class="btn btn-sm btn-danger delete-staff">Delete</button>
+                </td>
+            </tr>
+        `;
+        $('table tbody').append(newRow);
+    }
+
+    // Ajouter un nouvel utilisateur
+    $('#addSpecialistForm').submit(function (e) {
+        e.preventDefault();
+        const newUser = {
+            id: String(Math.floor(Math.random() * 10000)), // Générer un ID aléatoire
+            name: $('#specialization').val(), // Utiliser le champ "specialization" pour le nom complet
+            gender: $('#gender').val(),
+            specialization: $('#specialization').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            address: $('#address').val(),
+            role: "admin" // Définir le rôle sur "admin"
+        };
+
+        // Envoyer les données à l'API
+        fetch('http://localhost:3000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+        })
+        .then(response => response.json())
+        .then(data => {
+            users.push(data); // Ajouter le nouvel utilisateur au tableau
+            displayUsers(); // Recharger le tableau
+            $('#addSpecialistModal').modal('hide'); // Fermer la modal
+            $('#addSpecialistForm')[0].reset(); // Réinitialiser le formulaire
+        })
+        .catch(error => console.error('Erreur lors de l\'ajout de l\'utilisateur :', error));
+    });
+
+    // Éditer un utilisateur existant
+    $(document).on('click', '.edit-staff', function () {
+        const row = $(this).closest('tr');
+        const userId = row.data('id'); // Récupérer l'ID du staff
+        console.log("ID du staff à éditer :", userId); // Afficher l'ID dans la console
+
+        // Récupérer les données de l'utilisateur depuis l'API
+        fetch(`http://localhost:3000/users/${userId}`)
+            .then(response => response.json())
+            .then(user => {
+                console.log("Données du staff :", user); // Afficher les données du staff dans la console
+                // Remplir le formulaire d'édition avec les données de l'utilisateur
+                $('#editSpecialistId').val(user.id); // Définir l'ID du staff
+                $('#editSpecialization').val(user.specialization);
+                $('#editGender').val(user.gender);
+                $('#editEmail').val(user.email);
+                $('#editPhone').val(user.phone);
+                $('#editAddress').val(user.address);
+            })
+            .catch(error => console.error('Erreur lors de la récupération du staff :', error));
+    });
+
+    // Enregistrer les modifications d'un utilisateur
+    $('#editSpecialistForm').submit(function (e) {
+        e.preventDefault();
+        const userId = $('#editSpecialistId').val(); // Récupérer l'ID du staff
+
+        // Mettre à jour les données de l'utilisateur
+        const updatedUser = {
+            name: $('#editSpecialization').val(),
+            gender: $('#editGender').val(),
+            specialization: $('#editSpecialization').val(),
+            email: $('#editEmail').val(),
+            phone: $('#editPhone').val(),
+            address: $('#editAddress').val(),
+            role: "admin" // Définir le rôle sur "admin"
+        };
+
+        // Envoyer les modifications à l'API
+        fetch(`http://localhost:3000/users/${userId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUser),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Staff mis à jour :", data); // Afficher les données mises à jour dans la console
+            loadUsers(); // Recharger les utilisateurs depuis l'API
+            $('#editSpecialistModal').modal('hide'); // Fermer la modal
+        })
+        .catch(error => console.error('Erreur lors de la mise à jour du staff :', error));
+    });
+
+    // Supprimer un utilisateur
+    $(document).on('click', '.delete-staff', function () {
+        const row = $(this).closest('tr');
+        const userId = row.data('id');
+
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce membre du staff ?")) {
+            // Supprimer l'utilisateur de l'API
+            fetch(`http://localhost:3000/users/${userId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    loadUsers(); // Recharger les utilisateurs depuis l'API
+                } else {
+                    console.error('Erreur lors de la suppression du staff');
+                }
+            })
+            .catch(error => console.error('Erreur lors de la suppression du staff :', error));
+        }
+    });
+
+    // Charger les utilisateurs au démarrage
+    loadUsers();
+});
+    </script>
+</body>
+</html>

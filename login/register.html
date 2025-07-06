@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no">
+  <title>Register Page</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.style.zoom = "100%";
+    });
+  </script>
+</head>
+<body>
+  <video autoplay muted loop id="background-video">
+    <source src="Background.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo.
+</video>
+  <div class="wrapper">
+    <form id="registerForm">
+      <h2>Register</h2>
+      <div class="input-field">
+        <input type="text" id="name" required>
+        <label>Enter your full name</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="gender" required>
+        <label>Enter your gender</label>
+      </div>
+      <div class="input-field">
+        <input type="email" id="email" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="num" required>
+        <label>Enter your full phone number</label>
+      </div>
+      <div class="input-field">
+        <input type="text" id="address" required>
+        <label>Enter your address</label>
+      </div>
+      <!-- Ajout du champ Date of Birth -->
+      <div class="input-field">
+        <input type="date" id="dob" required>
+        <label></label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="password1" required>
+        <label>Create a password</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="password2" required>
+        <label>Confirm your password</label>
+      </div>
+      <div class="checkbox">
+        <p style="color: white; display: inline;">
+          I agree to the <a href="terms.html">Terms and Conditions</a>
+        </p>
+        <input type="checkbox" id="terms" required style="margin-left: 8px;">
+      </div>
+      
+      <br>
+      <button type="submit">Register</button>      
+      <br>    
+      <div class="login">
+        <p style="color:white;">Already have an account? <a href="login.html">Log In</a></p>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lien vers le fichier JavaScript -->
+  <script src="register.js"></script>
+</body>
+</html>

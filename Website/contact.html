@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - E-Book Store</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Theme Toggle -->
+      <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle theme">
+          <i data-lucide="sun"></i>
+        </button>
+      </div>
+
+      <!-- Header -->
+      <header>
+        <h1>Contact Us</h1>
+      </header>
+
+      <!-- Main Content -->
+      <main>
+        <div class="grid">
+          <!-- Contact Information -->
+          <div class="info-section">
+            <div>
+              <h2>Help</h2>
+              <p class="description">
+                Have questions about our <strong>E-Book Store</strong> ? We're here to help! Fill out the form
+                and we'll get back to you as soon as possible.
+              </p>
+            </div>
+
+            <div class="contact-info">
+              <div class="info-item">
+                <div class="icon-container">
+                  <i data-lucide="mail"></i>
+                </div>
+                <div>
+                  <p class="info-label">Email</p>
+                  <p class="info-value">support@ebookstore.com</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="icon-container">
+                  <i data-lucide="phone"></i>
+                </div>
+                <div>
+                  <p class="info-label">Phone</p>
+                  <p class="info-value">0655430038</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="icon-container">
+                  <i data-lucide="map-pin"></i>
+                </div>
+                <div>
+                  <p class="info-label">Location</p>
+                  <p class="info-value">Ain Sebaa,Casablanca, 20250</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="form-container">
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit">
+                <i data-lucide="send"></i>
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="contact.js"></script>
+  </body>
+</html>

@@ -1,0 +1,277 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "The Giver",
+      "author": "Robert C. Martin",
+      "isbn": "9780132350884",
+      "price": 45.99,
+      "coverImage": "image/arrival_1.png",
+      "link": "http://localhost:3000/books"
+    },
+    {
+      "id": "2",
+      "title": "The Wright Brothers",
+      "author": "Andrew Hunt, David Thomas",
+      "isbn": "9780201616224",
+      "price": 39.99,
+      "coverImage": "image/arrival_2.png",
+      "link": "http://localhost:3000/books"
+    },
+    {
+      "id": "3",
+      "title": "Radical Gardening",
+      "author": "George McKay",
+      "isbn": "978020162025",
+      "price": 59.99,
+      "coverImage": "image/arrival_3.png",
+      "link": "http://localhost:3000/books"
+    }
+  ],
+  "users": [
+    {
+      "name": "admin 1",
+      "gender": "male",
+      "specialization": "admin 1",
+      "email": "admin@admin.com",
+      "phone": "0655332258",
+      "address": "admin",
+      "role": "admin",
+      "id": "4427"
+    },
+    {
+      "id": "1",
+      "name": "admin",
+      "genre": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "admin@admin.com",
+      "num": "admin",
+      "password": "admin123",
+      "address": "123 Rue des Lilas, Casablanca, Maroc",
+      "role": "admin",
+      "orderHistory": [
+        1
+      ]
+    },
+    {
+      "name": "Adam",
+      "gender": "male",
+      "dob": "2025-01-01",
+      "typeClient": "nouveaux",
+      "email": "john.doe@example.com",
+      "num": "0763081980",
+      "address": "456 Avenue Sunshine, Paris, France",
+      "role": "user",
+      "id": "2"
+    },
+    {
+      "id": "d9ba",
+      "nom": "simo",
+      "genre": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "simo@gmail.com",
+      "num": "0616234590",
+      "address": "ain sebaa, casablanca",
+      "password": "azerty",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "f8ed",
+      "nom": "rahimi",
+      "genre": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "hhhhhh@gmail.com",
+      "num": "0617181920",
+      "address": "gggg",
+      "password": "azerty",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "c3d3",
+      "nom": "tt",
+      "gender": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "tt@gmail.com",
+      "num": "0171819201",
+      "address": "gggg",
+      "password": "aze",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "198",
+      "name": "sohaib",
+      "gender": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "sohaib123@gmail.com",
+      "num": "07677787980",
+      "address": "bernoussi,casablanca",
+      "password": "azerty",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "6682",
+      "name": "ilyass",
+      "gender": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "ilyass1223@gmail.com",
+      "num": "0666081980",
+      "address": "ain sebaa, casablanca",
+      "password": "azerty",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "5380",
+      "name": "ikram haddad",
+      "gender": "female",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "ikram123@gmail.com",
+      "num": "0630464891",
+      "address": "ain sebaa, casablanca",
+      "password": "12345678",
+      "role": "user",
+      "orderHistory": []
+    },
+    {
+      "id": "5082",
+      "name": "ilyass",
+      "gender": "male",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "ilyass2@gmail.com",
+      "num": "0619919280",
+      "address": "ain sebaa, casablanca",
+      "password": "ilyass2001",
+      "role": "admin",
+      "orderHistory": []
+    },
+    {
+      "id": "6733",
+      "name": "test",
+      "gender": "test",
+      "dob": "2222-02-22",
+      "typeClient": "nouveaux",
+      "email": "test@gmail.com",
+      "num": "0606060606",
+      "address": "test",
+      "password": "test123",
+      "role": "user",
+      "orderHistory": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        }
+      ],
+      "total": 45.99,
+      "status": "shipped",
+      "orderDate": "2025-01-01"
+    },
+    {
+      "id": "3935",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        }
+      ],
+      "total": 490,
+      "status": "pending",
+      "orderDate": "2025-01-14"
+    },
+    {
+      "id": "5922",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        }
+      ],
+      "total": 45.99,
+      "status": "pending",
+      "orderDate": "2025-01-14"
+    },
+    {
+      "id": "order-4836",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "01010101010101",
+          "quantity": 1
+        }
+      ],
+      "total": 190,
+      "status": "pending",
+      "orderDate": "2222-02-22"
+    },
+    {
+      "id": "2669",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        },
+        {
+          "bookId": "9780201616224",
+          "quantity": 1
+        },
+        {
+          "bookId": "978020162025",
+          "quantity": 1
+        }
+      ],
+      "total": 145.97,
+      "status": "pending",
+      "orderDate": "2025-01-14"
+    },
+    {
+      "id": "9151",
+      "userId": 1,
+      "books": [
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        },
+        {
+          "bookId": "978020162025",
+          "quantity": 1
+        },
+        {
+          "bookId": "9780132350884",
+          "quantity": 1
+        },
+        {
+          "bookId": "9780201616224",
+          "quantity": 1
+        },
+        {
+          "bookId": "978020162025",
+          "quantity": 1
+        }
+      ],
+      "total": 251.95000000000002,
+      "status": "pending",
+      "orderDate": "2025-01-15"
+    }
+  ]
+}

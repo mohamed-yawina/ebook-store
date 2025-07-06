@@ -1,0 +1,306 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+        overflow-x: hidden;
+}
+
+/* Navbar Styles */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.logo img {
+    height: 40px; /* Ajustez la taille du logo */
+    margin-right: 10px;
+}
+
+.logo-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 1.5rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ff6347; /* Couleur au survol */
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+/* Styles pour l'icône du panier et la notification */
+.nav-icons .icon {
+    position: relative; /* Permet de positionner le .cart-count par rapport à cette icône */
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px; /* Déplace le compteur vers le haut */
+    right: -10px; /* Déplace le compteur vers la droite */
+    background-color: #e74c3c; /* Couleur rouge */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.nav-icons .icon, .nav-icons .login-icon {
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-icons .icon:hover, .nav-icons .login-icon:hover {
+    color: #ff6347; /* Couleur au survol */
+}
+
+/* Menu déroulant */
+.dropdown {
+    position: absolute;
+    top: 60px; /* Ajustez en fonction de la hauteur de votre navbar */
+    right: 2rem;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.book-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.book-card h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.price {
+    color: #2ecc71;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.add_to_cart_btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add_to_cart_btn:hover {
+    background-color: #2980b9;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: -10px; /* Ajoute un espace de 20px entre le bas de la page et le footer */
+    width: 100%;
+}
+
+/* Panier Styles */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.cart-content {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 400px;
+    height: 100%;
+    background-color: white;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+}
+
+.close-cart {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-cart:hover {
+    color: #000;
+}
+
+#cartItems {
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+#cartTotal {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+#checkoutButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#checkoutButton:hover {
+    background-color: #27ae60;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .nav-icons {
+        margin-top: 1rem;
+    }
+
+    .cart-content {
+        width: 100%;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Books - Dashboard</title>
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/bootstrap.min.css">
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/line-awesome.min.css">
+    <link rel="stylesheet" href="../SiteAssets/css/pages/layout.css">
+    <link rel="stylesheet" href="../SiteAssets/css/pages/dashboard.css">
+    <link rel="stylesheet" href="../SiteAssets/css/vendors/Chart.min.css">
+    <link rel="icon" href="../../doclab-master/favicon.svg">
+    <script src="../SiteAssets/js/vendors/jquery.min.js"></script>
+    <script src="../SiteAssets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../SiteAssets/js/vendors/Chart.bundle.min.js"></script>
+    <script src="../SiteAssets/js/global.js"></script>
+    <script src="../SiteAssets/js/dashboard.js"></script>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-spinner"></div>
+  </div>
+  <style>
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loader-spinner {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(function () {
+        const loader = document.getElementById("loader");
+        loader.style.display = "none";
+      }, 1000);
+    });
+  </script>
+
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+      <a class="navbar-brand" href="dashboard.html">
+        <img src="logo.png" alt="Doclab Logo">
+        <span>E-Book Store</span>
+      </a>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown dropleft">
+            <a class="nav-link notification-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">3</span>
+              <i class="las la-bell"></i>
+            </a>
+            <div class="dropdown-menu notification-dropdown-menu shadow-lg" aria-labelledby="notification-dropdown">
+              <div class="dropdown-title">
+                <a href="#">Notifications <span class="ml-2 notifications-count">(3)</span></a>
+                <a class="float-right" href="#">Mark all as read</a>
+              </div>
+              <div class="dropdown-body">
+                <ul class="list-unstyled">
+                  <li class="media">
+                    <a class="notification-card" href="#">
+                      <img class="mr-3" src="../SiteAssets/images/inbox.svg" alt="Notification Icon">
+                      <div class="media-body">
+                        <h6 class="mt-0 mb-1">Collaboration tools available</h6>
+                        <p>Cras sit amet nibh libero, in gravida nulla.</p>
+                        <small class="text-muted">10.01.2025, 13:02</small>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <span class="vertical-divider"></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle" src="./admin.png" alt="Profile Picture">
+              <span class="d">ADMIN</span>
+            </a>
+            <div class="dropdown">
+              <div class="dropdown-menu shadow-lg profile-dropdown-menu" aria-labelledby="profile-dropdown">
+                <a class="dropdown-item" href="file:///C:/Users/Simo/Desktop/E-Book%20Store/Website/index.html">
+                  <i class="las la-globe mr-2"></i>Mon website
+                </a>
+                <a class="dropdown-item" href="settings_staff.html">
+                  <i class="las la-cog mr-2"></i>Settings
+                </a>
+                <a href="file:///C:/Users/Simo/Desktop/E-Book%20Store/login/login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Section -->
+  <main>
+    <div class="side-nav">
+      <ul class="list-group list-group-flush">
+        <a class="list-group-item" href="dashboard.html" data-toggle="tooltip" data-placement="bottom" title="Dashboard">
+          <i class="las la-shapes la-lw"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="list-group-item" href="Clients.html" data-toggle="tooltip" data-placement="bottom" title="Patients">
+          <i class="las la-user-injured la-lw"></i>
+          <span>Clients</span>
+        </a>
+        <a class="list-group-item" href="Books.html" data-toggle="tooltip" data-placement="bottom" title="Specialists">
+          <i class="las la-book la-lw"></i>
+          <span>Books</span>
+        </a>
+        <a class="list-group-item active" href="Commande.html" data-toggle="tooltip" data-placement="bottom" title="Procurement">
+          <i class="las la-shopping-cart la-lw"></i>
+          <span>Orders</span>
+        </a>
+        <a class="list-group-item" href="Staff.html" data-toggle="tooltip" data-placement="bottom" title="Staff">
+          <i class="las la-users la-lw"></i>
+          <span>Staff</span>
+        </a>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <div class="container-fluid">
+        <div class="section title-section">
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="page-title"></h5>
+            </div>
+          </div>
+        </div>
+        <div class="section filters-section">
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-md-6 d-flex">
+              <div class="btn-group mr-2">
+                <button class="btn btn-dark-red-o dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="las la-filter"></i> Filter
+                </button>
+                <div class="dropdown-menu" aria-labelledby="filterDropdown">
+                  <a class="dropdown-item" href="#">Numéro de Commande</a>
+                  <a class="dropdown-item" href="#">Status</a>
+                  <a class="dropdown-item" href="#">Date Commande</a>
+                </div>
+              </div>
+              <div class="btn-group mr-2">
+                <button class="btn btn-dark-red-o dropdown-toggle" type="button" id="sortDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="las la-sort"></i> Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                  <a class="dropdown-item" href="#">Numéro de Commande</a>
+                  <a class="dropdown-item" href="#">Status</a>
+                  <a class="dropdown-item" href="#">Date Commande</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 d-flex justify-content-end">
+              <button class="btn btn-dark-red-f-gr" data-toggle="modal" data-target="#addRequestModal">
+                <i class="las la-plus-circle"></i>Create a Request
+              </button>
+            </div>
+          </div>
+        </div>
+
+          <!-- Section pour afficher les livres -->
+<div id="booksContainer" class="books-container"></div>
+
+<!-- Tableau pour afficher les commandes -->
+<table class="table table-hover table-responsive-lg">
+  <thead>
+    <tr>
+      <th>Operation ID</th>
+      <th>ISBN Books</th>
+      <th>Total</th>
+      <th>Statut</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="ordersTableBody"></tbody>
+</table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Formulaire dans la modal -->
+<div class="modal fade" id="addRequestModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create a Request</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="requestForm">
+          <div class="form-group">
+            <label>ISBN</label>
+            <input type="number" class="form-control" id="bookName" required>
+          </div>
+          <div class="form-group">
+            <label>Quantité</label>
+            <input type="number" class="form-control" id="itemQuantity" required>
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" class="form-control" id="orderDate" required>
+          </div>
+          <div class="form-group">
+            <label>Total</label>
+            <input type="number" class="form-control" id="orderTotal" required>
+          </div>
+          <div class="form-group">
+            <label>Statut</label>
+            <select class="form-control" id="orderStatus">
+              <option value="pending">En attente</option>
+              <option value="shipped">Expédié</option>
+              <option value="delivered">Livré</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="saveRequest()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script>
+let books = [];
+let orders = [];
+
+// Charger les livres depuis data.json
+async function loadBooks() {
+  try {
+    const response = await fetch('./data.json'); // Chemin relatif vers data.json
+    if (!response.ok) {
+      throw new Error('Erreur de réseau : ' + response.statusText);
+    }
+    const data = await response.json();
+    books = data.books;
+    console.log("Livres chargés avec succès :", books);
+    displayBooks(); // Afficher les livres
+  } catch (error) {
+    console.error("Erreur lors du chargement des livres :", error);
+  }
+}
+
+// Charger les commandes depuis l'API
+async function loadOrders() {
+  try {
+    const response = await fetch('http://localhost:3000/orders');
+    if (!response.ok) {
+      throw new Error('Erreur de réseau : ' + response.statusText);
+    }
+    orders = await response.json();
+    console.log("Commandes chargées avec succès :", orders);
+    displayOrders(); // Afficher les commandes
+  } catch (error) {
+    console.error("Erreur lors du chargement des commandes :", error);
+  }
+}
+
+// Afficher les livres
+function displayBooks() {
+  const booksContainer = document.getElementById('booksContainer');
+  if (!booksContainer) {
+    console.error("Le conteneur des livres (booksContainer) est introuvable.");
+    return;
+  }
+
+  if (!books || !Array.isArray(books)) {
+    console.error("La variable 'books' est invalide ou non définie.");
+    booksContainer.innerHTML = "<p>Aucun livre disponible.</p>";
+    return;
+  }
+
+  booksContainer.innerHTML = books.map(book => `
+    <div class="book-card">
+      <img src="${book.coverImage}" alt="${book.title}">
+      <h3>${book.title}</h3>
+      <p>Auteur : ${book.author}</p>
+      <p>Prix : $${book.price.toFixed(2)}</p>
+      <a href="${book.link}" target="_blank">Voir plus</a>
+      <button class="btn btn-sm btn-dark-red-f" onclick="addToCart('${book.isbn}')">
+        Ajouter au panier
+      </button>
+    </div>
+  `).join('');
+}
+
+// Afficher les commandes
+function displayOrders() {
+  const ordersTableBody = document.getElementById('ordersTableBody');
+  if (!ordersTableBody) {
+    console.error("Le conteneur des commandes (ordersTableBody) est introuvable.");
+    return;
+  }
+
+  if (!orders || !Array.isArray(orders)) {
+    console.error("La variable 'orders' est invalide ou non définie.");
+    ordersTableBody.innerHTML = "<tr><td colspan='6'>Aucune commande disponible.</td></tr>";
+    return;
+  }
+
+  ordersTableBody.innerHTML = orders.map(order => `
+    <tr>
+      <td>${order.id}</td>
+      <td>${order.books.map(book => `${book.bookId} (x${book.quantity})`).join(', ')}</td>
+      <td>$${order.total.toFixed(2)}</td>
+      <td>${order.status}</td>
+      <td>${order.orderDate}</td>
+      <td>
+        <button class="btn btn-sm btn-dark-red-f" onclick="editOrder('${order.id}')">
+          Éditer
+        </button>
+        <button class="btn btn-sm btn-danger" onclick="deleteOrder('${order.id}')">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// Ajouter une commande via l'API
+async function addOrder(newOrder) {
+  try {
+    const response = await fetch('http://localhost:3000/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newOrder),
+    });
+    if (!response.ok) {
+      throw new Error('Erreur lors de l\'ajout de la commande : ' + response.statusText);
+    }
+    const data = await response.json();
+    console.log("Commande ajoutée avec succès :", data);
+    loadOrders(); // Recharger les commandes après ajout
+  } catch (error) {
+    console.error("Erreur lors de l'ajout de la commande :", error);
+    throw error;
+  }
+}
+
+// Éditer une commande via l'API
+async function editOrder(orderId) {
+  const order = orders.find(order => order.id === orderId);
+  if (order) {
+    const newStatus = prompt("Entrez le nouveau statut (pending, shipped, delivered) :", order.status);
+    if (newStatus && ["pending", "shipped", "delivered"].includes(newStatus)) {
+      try {
+        const response = await fetch(`http://localhost:3000/orders/${orderId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...order, status: newStatus }),
+        });
+        if (!response.ok) {
+          throw new Error('Erreur lors de la mise à jour de la commande : ' + response.statusText);
+        }
+        const data = await response.json();
+        console.log("Commande mise à jour avec succès :", data);
+        loadOrders(); // Recharger les commandes après mise à jour
+      } catch (error) {
+        console.error("Erreur lors de la mise à jour de la commande :", error);
+      }
+    } else {
+      alert("Statut invalide !");
+    }
+  }
+}
+
+// Supprimer une commande via l'API
+async function deleteOrder(orderId) {
+  if (confirm('Êtes-vous sûr de vouloir supprimer cette commande ?')) {
+    try {
+      const response = await fetch(`http://localhost:3000/orders/${orderId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Erreur lors de la suppression de la commande : ' + response.statusText);
+      }
+      console.log("Commande supprimée avec succès.");
+      loadOrders(); // Recharger les commandes après suppression
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la commande :", error);
+    }
+  }
+}
+
+// Fonction pour sauvegarder une nouvelle commande
+async function saveRequest() {
+  try {
+    // Récupérer les valeurs du formulaire
+    const bookName = document.getElementById('bookName').value;
+    const itemQuantity = parseInt(document.getElementById('itemQuantity').value, 10);
+    const orderDate = document.getElementById('orderDate').value;
+    const orderTotal = parseFloat(document.getElementById('orderTotal').value);
+    const orderStatus = document.getElementById('orderStatus').value;
+
+    // Valider les données
+    if (!bookName || isNaN(itemQuantity) || !orderDate || isNaN(orderTotal)) {
+      alert("Veuillez remplir tous les champs correctement.");
+      return;
+    }
+
+    // Créer l'objet de la nouvelle commande
+    const newOrder = {
+      id: generateOrderId(), // Générer un ID unique
+      userId: 1, // ID de l'utilisateur (à adapter)
+      books: [
+        {
+          bookId: bookName, // Utiliser le nom du livre comme ID (à adapter)
+          quantity: itemQuantity,
+        },
+      ],
+      total: orderTotal,
+      status: orderStatus,
+      orderDate: orderDate,
+    };
+
+    // Envoyer la commande à l'API
+    await addOrder(newOrder);
+
+    // Fermer la modal et réinitialiser le formulaire
+    $('#addRequestModal').modal('hide');
+    document.getElementById('requestForm').reset();
+  } catch (error) {
+    console.error("Erreur lors de la sauvegarde de la commande :", error);
+    alert("Une erreur s'est produite lors de la création de la commande.");
+  }
+}
+
+// Fonction pour générer un ID de commande unique
+function generateOrderId() {
+  return `order-${Math.floor(Math.random() * 10000)}`; // Exemple d'ID aléatoire
+}
+
+// Charger les données au démarrage
+document.addEventListener('DOMContentLoaded', () => {
+  loadBooks(); // Charger les livres
+  loadOrders(); // Charger les commandes
+});
+  </script>
+</body>
+</html>

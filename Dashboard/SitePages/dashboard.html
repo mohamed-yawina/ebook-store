@@ -1,0 +1,804 @@
+<html>
+<head>
+    <title>E-Books - Dashboard</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="../SiteAssets/css/vendors/bootstrap.min.css"/>
+<link rel="stylesheet" href="../SiteAssets/css/vendors/line-awesome.min.css"/>
+<link rel="stylesheet" href="../SiteAssets/css/pages/layout.css"/>
+<link rel="icon" href="../../doclab-master/favicon.svg"/>
+<script src="../SiteAssets/js/vendors/jquery.min.js">
+
+</script>
+<script src="../SiteAssets/js/vendors/bootstrap.bundle.min.js">
+</script><script src="../SiteAssets/js/global.js">
+
+</script>
+<link rel="stylesheet" href="../SiteAssets/css/pages/dashboard.css"/>
+<link rel="stylesheet" href="../SiteAssets/css/vendors/Chart.min.css"/>
+<script src="../SiteAssets/js/vendors/Chart.bundle.min.js">
+
+</script>
+<script src="../SiteAssets/js/dashboard.js">
+
+</script></head><body>
+
+  <div id="loader">
+    <div class="loader-spinner"></div> <!-- Animation de chargement -->
+  </div>
+  <style>
+    /* Style pour le conteneur du loader */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* S'assure qu'il est au-dessus de tout */
+}
+
+/* Style pour l'animation du loader */
+.loader-spinner {
+  border: 8px solid #f3f3f3; /* Couleur de fond du spinner */
+  border-top: 8px solid #3498db; /* Couleur du spinner */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite; /* Animation de rotation */
+}
+
+/* Animation de rotation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+  </style>
+  <script>
+   window.addEventListener("load", function () {
+  setTimeout(function () {
+    const loader = document.getElementById("loader");
+    loader.style.display = "none";
+  }, 1000); // 3 secondes
+});
+  </script>
+
+
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar navbar-expand-lg shadow-sm fixed-top">
+      <a class="navbar-brand" href="dashboard.html">
+        <img src="logo.png" alt="Doclab Logo"/>
+        <span>E-Book Store</span>
+      </a>
+      <div class="navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown dropleft">
+            <a class="nav-link notification-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">3</span>
+              <i class="las la-bell"></i>
+            </a>
+            <div class="dropdown-menu notification-dropdown-menu shadow-lg" aria-labelledby="notification-dropdown">
+              <div class="dropdown-title">
+                <a href="#">Notifications <span class="ml-2 notifications-count">(3)</span></a>
+                <a class="float-right" href="#">Mark all as read</a>
+              </div>
+              <div class="dropdown-body">
+                <ul class="list-unstyled">
+                  <li class="media">
+                    <a class="notification-card" href="#">
+                      <img class="mr-3" src="../SiteAssets/images/inbox.svg" alt="Notification Icon"/>
+                      <div class="media-body">
+                        <h6 class="mt-0 mb-1">Collaboration tools available</h6>
+                        <p>Cras sit amet nibh libero, in gravida nulla.</p>
+                        <small class="text-muted">10.01.2025, 13:02</small>
+                      </div>
+                    </a>
+                  </li>
+                  <!-- Repeat Notification Items as Needed -->
+                </ul>
+              </div>
+              
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <span class="vertical-divider"></span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link profile-dropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle" src="./admin.png" alt="Profile Picture"/>
+              <span class="d">ADMIN</span>
+            </a>
+            <div class="dropdown">
+              <div class="dropdown-menu shadow-lg profile-dropdown-menu" aria-labelledby="profile-dropdown">
+                <a class="dropdown-item" href="file:///C:/Users/Simo/Desktop/E-Book%20Store/Website/index.html">
+                  <i class="las la-globe mr-2"></i>Mon website
+                </a>
+                <a class="dropdown-item" href="settings_staff.html">
+                  <i class="las la-cog mr-2"></i>Settings
+                </a>
+                <!-- Bouton de déconnexion -->
+                   <a href="file:///C:/Users/Simo/Desktop/E-Book%20Store/login/login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+   <!-- Onboarding Modal (Existing) -->
+   <div class="modal onboarding-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Welcome To Your Dashboard Admin - E-Book Store</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="las la-times-circle"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="carousel slide" id="carouselExampleCaptions" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block dash-image" src="../SiteAssets/images/undraw_dashboard_nklg.svg" alt="Dashboard"/>
+                <div class="carousel-caption d-md-block">
+                  <p>Intuitive <a href="dashboard.html" data-dismiss="modal">Dashboard <i class="las la-external-link-alt"></i></a></p>
+                </div>
+              </div>
+              <style>
+              .dash-image {
+                transform: scale(0.7); /* Réduit la taille à 80% */
+                transform-origin: center; /* Garde l'image centrée */
+                transition: transform 0.3s ease; /* Animation fluide */
+              }
+              
+              .dash-image:hover {
+                transform: scale(0.8); /* Légèrement plus grand au survol */
+              }
+              </style>
+
+              <div class="carousel-item">
+                <img class="d-block clients-image" src="access_client.png" alt="Specialists"/>
+                <div class="carousel-caption d-md-block">
+                  <p>Access to <a href="Clients.html">Clients<i class="las la-external-link-alt"></i></a></p>
+                </div>
+              </div>
+            <style>
+            .clients-image {
+              transition: transform 0.3s ease; /* Animation fluide */
+            }
+            
+            .clients-image:hover {
+              transform: scale(1.1); /* Zoom de 10% */
+            }
+            </style>
+
+              <div class="carousel-item">
+                <img class="d-block Books-image" src="Add_Books.png" alt="Add Books"/>
+                <div class="carousel-caption d-md-block">
+                  <p>Add books easily <a href="Livres.html">Add a book<i class="las la-external-link-alt"></i></a></p>
+                </div>
+              </div>
+              <style>
+              .Books-image {
+                transform: scale(0.7); /* Réduit la taille à 40% */
+                transform-origin: center; /* Garde l'image centrée */
+                transition: transform 0.3s ease; /* Animation fluide */
+              }
+              
+              .Books-image:hover {
+                transform: scale(0.8); /* Légèrement plus grand au survol */
+              }
+              </style>
+
+              <div class="carousel-item">
+                <img class="d-block Staff-image" src="../SiteAssets/images/undraw_new_notifications_fhvw.svg" alt="Notifications"/>
+                <div class="carousel-caption d-md-block">
+                  <p>Comprehensive<a href="Staff.html">Staff<i class="las la-external-link-alt"></i></a>Center</p>
+                </div>
+              </div>
+              <style>
+              .Staff-image {
+                transform: scale(0.7); /* Réduit la taille à 40% */
+                transform-origin: center; /* Garde l'image centrée */
+                transition: transform 0.3s ease; /* Animation fluide */
+              }
+              
+              .Staff-image:hover {
+                transform: scale(0.8); /* Légèrement plus grand au survol */
+              }
+              </style>
+
+              <div class="carousel-item">
+                <img class="d-block settings-image" src="../SiteAssets/images/undraw_Preferences_re_49in.svg" alt="Settings"/>
+                <div class="carousel-caption d-md-block">
+                  <p>Minimalist <a href="settings.html">Settings <i class="las la-external-link-alt"></i></a> Center</p>
+                </div>
+              </div>
+            </div>
+          <style>
+          .settings-image {
+            transform: scale(0.7); /* Réduit la taille à 40% */
+            transform-origin: center; /* Garde l'image centrée */
+            transition: transform 0.3s ease; /* Animation fluide */
+          }
+          
+          .settings-image:hover {
+            transform: scale(0.8); /* Légèrement plus grand au survol */
+          }
+          </style>
+
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+              <i class="las la-chevron-circle-left"></i>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+              <i class="las la-chevron-circle-right"></i>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Main Content Section -->
+  <main>
+    <div class="side-nav">
+      <ul class="list-group list-group-flush">
+        <a class="list-group-item active" href="dashboard.html" data-toggle="tooltip" data-placement="bottom" title="Dashboard">
+          <i class="las la-shapes la-lw"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="list-group-item" href="Clients.html" data-toggle="tooltip" data-placement="bottom" title="Patients">
+          <i class="las la-user-injured la-lw"></i>
+          <span>Clients</span>
+        </a>
+        <a class="list-group-item" href="Books.html" data-toggle="tooltip" data-placement="bottom" title="Specialists">
+          <i class="las la-book la-lw"></i> <!-- Icône de livre -->
+          <span>Books</span>
+        </a>
+        <a class="list-group-item" href="Commande.html" data-toggle="tooltip" data-placement="bottom" title="Procurement">
+          <i class="las la-shopping-cart la-lw"></i>
+          <span>Orders</span>
+        </a>
+        <a class="list-group-item" href="Staff.html" data-toggle="tooltip" data-placement="bottom" title="Staff">
+          <i class="las la-users la-lw"></i> <!-- Icône de groupe/utilisateurs -->
+          <span>Staff</span>
+        </a>
+        
+      </ul>
+    </div>
+<div class="main-content">
+<div class="container-fluid">
+<div class="section">
+<div class="row">
+<div class="col-md-6">
+<h5 class="page-title">
+
+</h5></div></div></div>
+<div class="section welcome-section">
+<div class="section-content">
+<div class="card-deck">
+<div class="card welcome-content-card">
+<div class="card-body">
+<div class="row">
+<div class="col-md-6 welcome-text-wrapper align-self-center">
+<h5>Hello, ADMIN <i class="las la-user-injured la-lw"></i> </h5>
+<p>Welcome to your Dashboard</p>
+</div>
+
+<div class="col-md-6 welcome-img-wrapper">
+<img src="../SiteAssets/images/hello.svg"/></div></div></div></div>
+<div class="card app-stats-card">
+<div class="card-body">
+<div class="row text-center">
+<div class="col-md-4">
+<i class="las la-user-injured la-3x align-self-center">
+
+</i>
+<p>Clients Actif
+
+</p>
+<h4>
+<a href="">12
+
+</a></h4></div>
+<div class="col-md-4">
+  <i class="las la-book la-3x align-self-center"></i>
+
+</i>
+<p>Livres Disponible
+
+</p>
+<h4>
+<a href="">15
+
+</a></h4></div>
+<div class="col-md-4">
+  <i class="las la-users la-3x align-self-center"></i>
+
+</i>
+<p>Staff Actif
+
+</p>
+<h4>
+<a href="">2
+
+</a></h4></div></div></div></div></div></div></div>
+<div class="section functionality-section">
+<div class="section-content">
+<div class="card-deck">
+<a class="card text-center" href="Commande.html">
+<div class="card-title">
+<div class="icon-wrapper">
+  <i class="las la-shopping-cart"></i>
+
+</i></div></div>
+<div href="C:/Users/Simo/Desktop/E-Book%20Store/Dashboard/SitePages/Commande.html" class="card-body">
+<p>Add Commande
+
+</p></div></a>
+<a class="card text-center" href="Books.html">
+<div class="card-title">
+<div class="icon-wrapper">
+  <i class="las la-book"></i>
+
+</i></div></div>
+<div href="specialists.html" class="card-body">
+<p><span>Add Book</span>
+
+</p></div></a>
+<a class="card text-center" href="Clients.html">
+<div class="card-title">
+<div class="icon-wrapper">
+<i class="las la-user-plus">
+
+</i></div></div>
+<div class="card-body">
+<p>Add User
+
+</p></div></a>
+<a class="card text-center" href="Staff.html">
+<div class="card-title">
+<div class="icon-wrapper">
+  <i class="las la-user-friends"></i>
+
+</i></div></div>
+<div class="card-body">
+<p>Add Staff
+
+</p></div></a></div></div></div>
+<div class="section card-summaries">
+<div class="section-content">
+<div class="card-deck">
+<div class="card">
+<div class="card-header">
+<h5>Recent Activities
+
+</h5></div>
+<div class="card-body">
+<canvas id="recent-activity-chart">
+
+</canvas></div></div>
+<div class="card">
+<div class="card-header">
+<h5>Total Commande
+
+</h5></div>
+<div class="card-body">
+<canvas id="bookings-chart">
+
+</canvas></div></div>
+<div class="card">
+<div class="card-header">
+<h5>Books summary
+
+</h5></div>
+<div class="card-body">
+<canvas id="diseases-chart">
+
+</canvas></div></div></div>
+<div class="card-deck">
+<div class="card">
+<div class="card-header">
+<h5 style="font-size: 22px;">Top Sells Books
+
+</h5></div>
+<div class="card-body">
+<ol type="1">
+<li style="font-size: 18px;">Rangers Apprentice </li>
+<li style="font-size: 18px;">Percy Jackson</li>
+<li style="font-size: 18px;">The Heroes of Olympics</li>
+<li style="font-size: 18px;">Harry Potter</li>
+<li style="font-size: 18px;">Squid Game</li>
+</li></ol></div>
+</div>
+<div class="card total-counts-summary">
+<div class="card-header">
+<h5>total counts
+
+</h5></div>
+<div class="card-body">
+<div class="row text-center text-capitalize">
+<div class="col-md-6">
+<i class="las la-users la-2x mb-1"></i>
+<h4 class="mb-1">100
+
+</h4>
+<p>total Clients
+
+</p></div>
+<div class="col-md-6">
+  <i class="las la-user-friends la-2x mb-1"></i>
+
+</i>
+<h4 class="mb-1">5
+
+</h4>
+<p>total staff
+
+</p></div>
+<div class="col-md-6">
+  <i class="las la-shopping-cart la-2x mb-1"></i>
+
+</i>
+<h4 class="mb-1">3210
+
+</h4>
+<p>total commandes
+
+</p></div>
+<div class="col-md-6">
+  <i class="las la-book la-2x mb-1"></i>
+
+</i>
+<h4 class="mb-1">40
+
+</h4>
+<p>total livres
+
+</p></div></div></div>
+</div>
+<div class="card">
+<div class="card-header">
+<h5>recent clients
+
+</h5></div>
+<div class="card-body">
+<table class="table table-hover table-responsive-md table-borderless">
+<tbody>
+<tr>
+<td>
+<img class="rounded-circle" src="review_1.png" loading="lazy"/></td>
+<td>
+<p>Amine El Khalfi
+
+</p>
+<small class="text-muted">Harry Potter Book
+  
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="review_2.png" loading="lazy"/></td>
+<td>
+<p>Sarah Bensouda
+
+</p>
+<small class="text-muted">The Giver Book
+
+</small></td>
+<td>
+<p class="text-muted">female
+
+</p></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="review_3.png" loading="lazy"/></td>
+<td>
+<p>Youssef Laamrani
+</p>
+<small class="text-muted">Squid Game Book
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td>
+<button class="btn btn-sm">
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="review_4.png" loading="lazy"/></td>
+<td>
+<p>Nada Hamdouchi
+</p>
+<small class="text-muted">Red Queen Book
+
+</small></td>
+<td>
+<p class="text-muted">female
+
+</p></td>
+
+
+</i></button></td></tr></tbody></table></div>
+</div></div>
+<div class="card-deck">
+<div class="card">
+<div class="card-header">
+<h5>Staff lists
+
+</h5></div>
+<div class="card-body">
+<table class="table table-borderless table-hover table-responsive-md">
+<tbody>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>Simo
+
+</p>
+<small class="text-muted">Admin
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>0655430038
+
+</p></td>
+<td class="text-right">
+<button class="btn btn-dark-red-f btn-sm">Contact
+
+</button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>Mohamed 
+
+</p>
+<small class="text-muted">Admin
+
+</small></td>
+<td>
+<p class="text-muted">Male
+
+</p></td>
+<td class="text-right">
+<p>0655430038
+
+</p></td>
+<td class="text-right">
+<button class="btn btn-dark-red-f btn-sm">Contact
+
+</button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>Mohamed Yawina
+
+</p>
+<small class="text-muted">Admin
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>0655430038
+
+</p></td>
+<td class="text-right">
+<button class="btn btn-dark-red-f btn-sm">Contact
+
+</button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>ADMIN
+
+</p>
+<small class="text-muted">Admin
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>0655430038
+
+</p></td>
+<td class="text-right">
+<button class="btn btn-dark-red-f btn-sm">contact
+</button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr></tbody></table></div>
+</div>
+<div class="card">
+<div class="card-header">
+<h5>Orders
+
+</h5></div>
+<div class="card-body">
+<table class="table table-borderless table-hover table-responsive-md">
+<tbody>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>order#089
+
+</p>
+<small class="text-muted">Client
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>The Giver
+
+</p></td>
+<td class="text-right">
+<button class="btn">
+<i class="las la-check-circle">
+
+</i></button>
+<button class="btn">
+<i class="las la-times-circle">
+
+</i></button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>order#090
+
+</p>
+<small class="text-muted">client
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>Percy Jackson
+
+</p></td>
+<td class="text-right">
+<button class="btn">
+<i class="las la-check-circle">
+
+</i></button>
+<button class="btn">
+<i class="las la-times-circle">
+
+</i></button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>order#091
+
+</p>
+<small class="text-muted">Client
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>Red Queen
+
+</p></td>
+<td class="text-right">
+<button class="btn">
+<i class="las la-check-circle">
+
+</i></button>
+<button class="btn">
+<i class="las la-times-circle">
+
+</i></button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr>
+<tr>
+<td>
+<img class="rounded-circle" src="../SiteAssets/images/man.svg" loading="lazy"/></td>
+<td>
+<p>order#092
+
+</p>
+<small class="text-muted">Client
+
+</small></td>
+<td>
+<p class="text-muted">male
+
+</p></td>
+<td class="text-right">
+<p>Squid Game
+
+</p></td>
+<td class="text-right">
+<button class="btn">
+<i class="las la-check-circle">
+
+</i></button>
+<button class="btn">
+<i class="las la-times-circle">
+
+</i></button></td>
+<td>
+<button class="btn btn-sm">
+
+
+</i></button></td></tr></tbody></table></div>
+</div></div></div></div>
+
+

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no">
+  <title>E-Book Store Website</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.style.zoom = "80%";
+    });
+  </script>
+
+    
+<body>
+    <div id="loader">
+        <div class="loader-spinner"></div> <!-- Animation de chargement -->
+      </div>
+      <style>
+        /* Style pour le conteneur du loader */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9); /* Fond semi-transparent */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; /* S'assure qu'il est au-dessus de tout */
+    }
+    
+    /* Style pour l'animation du loader */
+    .loader-spinner {
+      border: 8px solid #f3f3f3; /* Couleur de fond du spinner */
+      border-top: 8px solid #3498db; /* Couleur du spinner */
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite; /* Animation de rotation */
+    }
+    
+    /* Animation de rotation */
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+      </style>
+      <script>
+       window.addEventListener("load", function () {
+      setTimeout(function () {
+        const loader = document.getElementById("loader");
+        loader.style.display = "none";
+      }, 1000); // 3 secondes
+    });
+      </script>
+
+    <section>
+
+        <nav>
+            <div class="logo">
+                <a href="index.html"> <!-- Lien ajouté ici -->
+                    <img src="image/logo.png" alt="Logo">
+                    <span class="logo-title">E-Books</span>
+                </a>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#arrivals">Arrivals</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        
+            <div class="social_icon">
+                <form action="#Search" method="get" class="search-form" id="searchForm">
+                    <input type="text" placeholder="Recherche un Livre..." aria-label="Recherche" class="search-input" id="searchInput">
+                    <button type="submit" class="search-button" aria-label="Soumettre la recherche">
+                        <i class="fa-solid fa-magnifying-glass"></i> <!-- Icône de recherche -->
+                    </button>
+                </form>
+                <div id="results" class="results-box"></div> <!-- Zone pour afficher les résultats -->
+
+                <script>
+                    document.getElementById("searchForm").addEventListener("submit", function(event) {
+                        event.preventDefault(); // Empêche le comportement par défaut du formulaire
+                        // Redirige directement vers books.html
+                        window.location.href = 'books.html';
+                    });
+                    </script>                    
+                
+                <a href="#DarkMode" class="icon" id="darkModeToggle">
+                    <i class="fa-solid fa-moon"></i> <!-- Icône pour le mode sombre -->
+                </a>
+                <a href="Books.html" class="icon" id="cartIcon">
+                    <i class="fa-solid fa-book"></i> <!-- Icône de Book -->
+                </a>         
+                <!-- HTML pour le panier -->
+
+                <div class="login-container">
+                    <a href="#" class="login-icon" id="loginButton">
+                        <i class="fas fa-user"></i> <!-- Icône de personne -->
+                    </a>
+                </div>
+            </div>
+            <script>
+                document.getElementById("searchForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+                    const query = document.getElementById("searchInput").value; // Récupère la valeur du champ de recherche
+                    if (query) {
+                        // Redirige vers la page de recherche avec la requête
+                        window.location.href = `#Search?q=${encodeURIComponent(query)}`;
+                    } else {
+                        alert("Veuillez entrer un terme de recherche."); // Alerte si le champ est vide
+                    }
+                });
+            </script>            
+            
+                    <div class="dropdown" id="dropdownMenu" style="display: none;">
+                        <a href="#" id="accountButton"></a>
+                        <a href="Books.html" id="favoritesButton">Livres</a>
+                        <a href="#" id="logoutButton">Déconnexion</a>
+                    </div>         
+
+            <script>
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                darkModeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    // Changer l'icône en fonction du mode
+                    const icon = darkModeToggle.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                });
+            </script>
+                        
+                        <script>
+                            // Vérifie si l'utilisateur est connecté
+                            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                        
+                            // Récupère les éléments du DOM
+                            const accountButton = document.getElementById('accountButton');
+                            const logoutButton = document.getElementById('logoutButton');
+                        
+                            // Met à jour l'affichage en fonction de l'état de connexion
+                            if (isLoggedIn) {
+                                // Si l'utilisateur est connecté
+                                accountButton.innerText = 'Mon Compte';
+                                accountButton.addEventListener('click', function() {
+                                    alert('Accéder à Mon Compte'); // Remplacez cela par la redirection vers la page de compte
+                                });
+                        
+                                // Afficher le bouton "Déconnexion"
+                                logoutButton.style.display = 'block';
+                                logoutButton.innerText = 'Déconnexion';
+                            } else {
+                                // Si l'utilisateur n'est pas connecté
+                                accountButton.innerText = 'Se Connecter';
+                                accountButton.addEventListener('click', function() {
+                                    window.location.href = 'file:///C:/Users/Simo/Desktop/E-Book%20Store/login/login.html'; // Redirige vers la page de connexion
+                                });
+                        
+                                // Masquer le bouton "Déconnexion"
+                                logoutButton.style.display = 'none';
+                            }
+                        
+                            // Gestion du clic sur l'icône de connexion pour afficher le menu
+                            document.getElementById('loginButton').addEventListener('click', function(event) {
+                                event.preventDefault(); // Évite le comportement par défaut du lien
+                                const dropdown = document.getElementById('dropdownMenu');
+                                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none'; // Affiche ou cache le menu
+                            });
+                        
+                            // Gestion des clics sur les autres options du menu
+                            document.getElementById('favoritesButton').addEventListener('click', function() {
+                                alert('Accéder au Livres'); // Remplacez cela par la redirection vers la page des favoris
+                            });
+                        
+                            // Gestion de la déconnexion
+                            logoutButton.addEventListener('click', function() {
+                                localStorage.removeItem('isLoggedIn'); // Déconnexion
+                                window.location.href = 'file:///C:/Users/Simo/Desktop/E-Book%20Store/Website/index.html'; // Redirige vers la page d'accueil
+                            });
+                        </script>
+        </nav>
+        
+        <div class="main">
+
+            <div class="main_tag">
+                <h1>WELCOME TO<br><span>E-BOOK STORE</span></h1>
+
+                <p>
+                    <strong style="color: #089da1; font-size: 24px;">Bienvenue sur notre site !</strong> <strong style="font-size: 17px;"> Nous sommes ravis de vous offrir une expérience unique qui allie qualité et innovation. 
+                    Notre équipe s'engage à vous fournir des services exceptionnels, répondant à vos besoins avec professionnalisme et 
+                    attention. Que vous soyez à la recherche de solutions personnalisées ou d'informations détaillées, nous avons ce qu'il
+                     vous faut. Explorez nos offres et découvrez comment nous pouvons vous aider à atteindre vos objectifs. 
+                     Votre satisfaction est notre priorité, et nous sommes là pour vous accompagner à chaque étape.</strong>
+                </p>
+                <a href="#" class="main_btn">Learn More</a>
+
+            </div>
+
+            <div class="main_img">
+                <img src="image/table.png" alt="Table" class="hover-image">
+            </div>
+        </div>
+    </section>
+    
+    
+    <!--Services-->
+
+    <div class="services">
+
+        <div class="services_box">
+
+            <div class="services_card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Fast Delivery</h3>
+                <p>
+                    La livraison rapide est devenue une priorité pour les consommateurs.
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-headset"></i>
+                <h3>24 x 7 Services</h3>
+                <p>
+                    La disponibilité des services 24 heures sur 24 et 7 jours sur 7.
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-tag"></i>
+                <h3>Best Deal</h3>
+                <p>
+                    Les meilleures offres attirent l'attention des consommateurs à la recherche. 
+                </p>
+            </div>
+
+            <div class="services_card">
+                <i class="fa-solid fa-lock"></i>
+                <h3>Secure Payment</h3>
+                <p>
+                    La sécurité des paiements en ligne pour la confiance des consommateurs.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+<br>
+
+    <!--About-->
+
+    <div class="about">
+
+        <div class="about_image" id="about">
+            <img src="image/about.png">
+        </div>
+        <div class="about_tag">
+            <h1>About Us</h1>
+            <p>
+                Bienvenue chez <strong style="color: #089da1; font-size: 24px;">E-Book</strong> , sur notre plateforme dédiée aux 
+                passionnés de lecture. Nous croyons au pouvoir des livres pour inspirer, éduquer et transformer. Que vous soyez à la 
+                recherche d’un roman captivant, d’un ouvrage académique, ou d’un guide pratique, notre vaste collection répond à tous 
+                les goûts et besoins. Nous nous engageons à offrir des livres de qualité à des prix compétitifs, tout en garantissant 
+                une expérience d'achat en ligne simple et agréable. Rejoignez notre communauté de lecteurs et explorez un monde d'idées 
+                et d'histoires sans limites. Merci de nous faire confiance pour accompagner votre passion pour la lecture.
+                
+            </p>
+            <a href="#" class="about_btn">Learn More</a>
+        </div>
+    </div>
+    <script>
+        // Fonction pour le défilement fluide avec décalage
+        document.querySelectorAll('a[href^="#about"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Récupérer la cible
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                // Calculer la position de défilement
+                const offset = target.getBoundingClientRect().top + window.scrollY - 100; // Ajuster le décalage ici
+                
+                // Défilement vers la position calculée
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>    
+<br>
+    <!--Books-->
+
+    <div class="featured_boks" id="featured">
+
+        <h1>Featured Books</h1>
+
+        <div class="featured_book_box">
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_1.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 1</h2>
+                    <p class="writer">CocoGoose</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_2.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 2</h2>
+                    <p class="writer">Sublettero</p>
+                    <div class="categories">Romance</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_3.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 3</h2>
+                    <p class="writer">Wespari</p>
+                    <div class="categories">Horror</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_4.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 4</h2>
+                    <p class="writer">Beautieully</p>
+                    <div class="categories">Horror</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_5.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 5</h2>
+                    <p class="writer">Clever Lands</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+            
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_6.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 6</h2>
+                    <p class="writer">Dick Francis</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_7.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 7</h2>
+                    <p class="writer">The Art City</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_8.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 8</h2>
+                    <p class="writer">Music Rock</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_9.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 9</h2>
+                    <p class="writer">Free Fail</p>
+                    <div class="categories">Horror</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_10.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 10</h2>
+                    <p class="writer">Sample Text</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_11.jpg">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 11</h2>
+                    <p class="writer">Boring Girls</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_12.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 12</h2>
+                    <p class="writer">Thanks is Everthing</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_13.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 13</h2>
+                    <p class="writer">Your Title Goes Were</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_14.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 14</h2>
+                    <p class="writer">Sample Text</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            <div class="featured_book_card">
+
+                <div class="featurde_book_img">
+                    <img src="image/book_15.png">
+                </div>
+
+                <div class="featurde_book_tag">
+                    <h2>Featured Book 15</h2>
+                    <p class="writer">Black History Month</p>
+                    <div class="categories">Thriller</div>
+                    <p class="book_price"><del>Out of Stock</del></p>
+                    <a href="#" class="f_btn">Learn More</a>
+                </div>               
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+    <script>
+        // Function for smooth scrolling with offset
+        document.querySelectorAll('a[href^="#featured"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Get the target element
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                // Calculate the scroll position
+                const offset = target.getBoundingClientRect().top + window.scrollY - 100; // Adjust the offset here
+                
+                // Scroll to the calculated position
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+   <!--Arrivals-->
+
+   <div class="featured_boks" id="arrivals">
+
+    <h1>Arrivals Books</h1>
+
+    <div class="featured_book_box">
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_1.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 1</h2>
+                <p class="writer">Lois Lowry</p>
+                <div class="categories">Horror</div>
+                <p class="book_price">Available On Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_2.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 2</h2>
+                <p class="writer">The Wright Brothers</p>
+                <div class="categories">Thriller</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_3.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 3</h2>
+                <p class="writer">Radical Gardening</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_4.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 4</h2>
+                <p class="writer">Red Queen</p>
+                <div class="categories">Horror</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_5.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 5</h2>
+                <p class="writer">Harper Lee</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available On Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+        
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_6.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 6</h2>
+                <p class="writer">Harry Potter</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_7.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 7</h2>
+                <p class="writer">Heroes of Olympus</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_8.webp">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 8</h2>
+                <p class="writer">Squid Game</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_9.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 9</h2>
+                <p class="writer">Ranger's Apprentice</p>
+                <div class="categories">Horror</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+
+        <div class="featured_book_card">
+
+            <div class="featurde_book_img">
+                <img src="image/arrival_10.jpg">
+            </div>
+
+            <div class="featurde_book_tag">
+                <h2>Arrival Book 10</h2>
+                <p class="writer">Percy Jackson</p>
+                <div class="categories">Romance</div>
+                <p class="book_price">Available on Stock<sub></sub></p>
+                <a href="#" class="f_btn">Learn More</a>
+            </div>               
+
+        </div>
+    </div>
+</div>
+    <script>
+        // Function for smooth scrolling with offset
+        document.querySelectorAll('a[href^="#arrivals"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Get the target element
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                // Calculate the scroll position
+                const offset = target.getBoundingClientRect().top + window.scrollY - 100; // Adjust the offset here
+                
+                // Scroll to the calculated position
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+    <!--reviews-->
+
+    <div class="reviews" id="reviews">
+        <h1>Reviews</h1>
+
+        <div class="review_box">
+
+            <div class="review_card">
+                <i class="fa-solid fa-quote-right"></i>
+                <div class="card_top">
+                    <img src="image/review_1.png">
+                </div>
+                <div class="card">
+                    <h2>Amine El Khalfi</h2>
+                    <p>Un excellent service, les livres sont livrés rapidement et en bon état. La variété de choix est impressionnante !
+                    </p>
+                    <div class="review_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review_card">
+                <i class="fa-solid fa-quote-right"></i>
+                <div class="card_top">
+                    <img src="image/review_2.png">
+                </div>
+                <div class="card">
+                    <h2>Sarah Bensouda</h2>
+                    <p>J'adore le design du site, très facile à naviguer. Quelques livres étaient en rupture de stock, mais je suis satisfaite de ma commande.
+                    </p>
+                    <div class="review_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review_card">
+                <i class="fa-solid fa-quote-right"></i>
+                <div class="card_top">
+                    <img src="image/review_3.png">
+                </div>
+                <div class="card">
+                    <h2>Youssef Laamrani</h2>
+                    <p>"Les prix sont compétitifs et les promotions sont intéressantes. J'ai trouvé des livres rares que je cherchais depuis longtemps."
+                    </p>
+                    <div class="review_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="review_card">
+                <i class="fa-solid fa-quote-right"></i>
+                <div class="card_top">
+                    <img src="image/review_4.png">
+                </div>
+                <div class="card">
+                    <h2>Nada Hamdouchi</h2>
+                    <p>Le site est bien, mais la livraison a pris plus de temps que prévu. Cela dit, le support client est réactif.
+                    </p>
+                    <div class="review_icon">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        // Function for smooth scrolling with offset
+        document.querySelectorAll('a[href^="#reviews"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Get the target element
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                // Calculate the scroll position
+                const offset = target.getBoundingClientRect().top + window.scrollY - 100; // Adjust the offset here
+                
+                // Scroll to the calculated position
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    
+
+
+    <!--Banner-->
+
+    <div class="banner">
+        <a href="#" class="banner_btn">Learn More</a>
+    </div>
+
+
+
+
+
+    <!--Blog-->
+    
+    <div class="blog" id="blog">
+        <h1>Our Blog</h1>
+        <div class="blog_box">
+
+            <div class="blog_card">
+                <div class="blog_img">
+                    <img src="image/blog_1.jpg">
+                </div>
+                <div class="blog_tag">
+                    <h2>Les 5 Livres Incontournables pour Débuter l'Année 2025</h2>
+                    <p>
+                        Découvrez notre sélection des meilleurs ouvrages pour commencer la nouvelle année avec inspiration et motivation. Du développement personnel aux romans captivants, ces livres sauront enrichir votre esprit et votre bibliothèque.
+                    </p>
+                    <a href="#" class="banner_btn">Lire l'article</a>
+                    <div class="blog_icon">
+                        <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
+                        <i id="heartIcon" class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Cibler l'icône de calendrier par son ID
+                const calendarIcon = document.getElementById('calendarIcon');
+        
+                // Ajouter un écouteur d'événement pour le clic
+                calendarIcon.addEventListener('click', () => {
+                    // Obtenir la date actuelle
+                    const currentDate = new Date();
+        
+                    // Formater la date (exemple : "1er Janvier 2025")
+                    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                    const formattedDate = currentDate.toLocaleDateString('fr-FR', options);
+        
+                    // Afficher l'alerte avec la date formatée
+                    alert(`Date ajoutée à votre calendrier : ${formattedDate}`);
+                });
+        
+                // Fonctionnalité pour l'icône de cœur
+                const heartIcon = document.getElementById('heartIcon');
+                heartIcon.addEventListener('click', () => {
+                    heartIcon.classList.toggle('active');
+                    if (heartIcon.classList.contains('active')) {
+                        alert('Article aimé !');
+                    } else {
+                        alert('Article non aimé.');
+                    }
+                });
+            </script>
+
+<div class="blog_card">
+    <div class="blog_img">
+        <img src="image/blog_2.jpg" alt="Voyage en Italie">
+    </div>
+    <div class="blog_tag">
+        
+        <h2>Top 10 des Destinations à Visiter en Italie en 2025</h2>
+        <p>
+            L'Italie, pays riche en histoire et en culture, offre des paysages à couper le souffle. Découvrez notre sélection des meilleures destinations à visiter, des ruines romaines aux canaux de Venise.
+        </p><br>
+        <a href="#" class="banner_btn">Lire l'article</a>
+        <div class="blog_icon">
+            <i id="calendarIcon2" class="fa-solid fa-calendar-days"></i>
+            <i id="heartIcon2" class="fa-solid fa-heart"></i>
+        </div>
+    </div>
+</div>
+<script>
+    // Cibler l'icône de calendrier par son ID
+    const calendarIcon2 = document.getElementById('calendarIcon2');
+
+    // Ajouter un écouteur d'événement pour le clic
+    calendarIcon2.addEventListener('click', () => {
+        // Obtenir la date actuelle
+        const currentDate = new Date();
+
+        // Formater la date (exemple : "1er Janvier 2025")
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('fr-FR', options);
+
+        // Afficher l'alerte avec la date formatée
+        alert(`Date ajoutée à votre calendrier : ${formattedDate}`);
+    });
+
+    // Fonctionnalité pour l'icône de cœur
+    const heartIcon2 = document.getElementById('heartIcon2');
+    heartIcon2.addEventListener('click', () => {
+        heartIcon2.classList.toggle('active');
+        if (heartIcon2.classList.contains('active')) {
+            alert('Article aimé !');
+        } else {
+            alert('Article non aimé.');
+        }
+    });
+</script>
+
+<div class="blog_card">
+    <div class="blog_img">
+        <img src="image/blog_3.jpg" alt="Conseils pour le télétravail">
+    </div>
+    <div class="blog_tag">
+        <h2>Conseils Essentiels pour Optimiser Votre Télétravail en 2025</h2>
+        <p>
+            Le télétravail est devenu une norme. Découvrez nos meilleurs conseils pour rester productif, organiser votre espace de travail et maintenir un équilibre entre vie professionnelle et personnelle.
+        </p><br>
+        <a href="#" class="banner_btn">Lire l'article</a>
+        <div class="blog_icon">
+            <i id="calendarIcon3" class="fa-solid fa-calendar-days"></i>
+            <i id="heartIcon3" class="fa-solid fa-heart"></i>
+        </div>
+    </div>
+</div>
+<script>
+    // Cibler l'icône de calendrier par son ID
+    const calendarIcon3 = document.getElementById('calendarIcon3');
+
+    // Ajouter un écouteur d'événement pour le clic
+    calendarIcon3.addEventListener('click', () => {
+        // Obtenir la date actuelle
+        const currentDate = new Date();
+
+        // Formater la date (exemple : "1er Janvier 2025")
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        const formattedDate = currentDate.toLocaleDateString('fr-FR', options);
+
+        // Afficher l'alerte avec la date formatée
+        alert(`Date ajoutée à votre calendrier : ${formattedDate}`);
+    });
+
+    // Fonctionnalité pour l'icône de cœur
+    const heartIcon3 = document.getElementById('heartIcon3');
+    heartIcon3.addEventListener('click', () => {
+        heartIcon3.classList.toggle('active');
+        if (heartIcon3.classList.contains('active')) {
+            alert('Article aimé !');
+        } else {
+            alert('Article non aimé.');
+        }
+    });
+</script>
+
+
+        </div>
+    </div>
+    
+
+
+
+
+
+    <!--Footer-->
+
+    <footer>
+        <div class="footer_main">
+
+            <footer>
+                <div class="footer_main">
+                    <div class="tag">
+                        <img src="image/logo.png">
+                        <span class="logo-title">E-Books</span>
+                        <style>
+                            .footer_main .tag .logo-title {
+                                position: relative; /* Permet d'utiliser 'top' */
+                                top: -30px; /* Ajustez cette valeur selon vos besoins */
+                            }
+                        </style>
+                        <p style="margin: 0; line-height: 1.5;">
+                            Bienvenue chez <strong>E-Books</strong>, votre destination privilégiée pour une vaste sélection de livres numériques. 
+                            Nous nous engageons à offrir une expérience de lecture inégalée, avec des titres allant des <strong>Best-Sellers</strong> 
+                            aux nouveautés. Explorez notre collection et trouvez votre prochain coup de cœur littéraire !
+                        </p>
+                    </div>
+                    <style>
+    .footer_main .tag p {
+        color: #000000; /* Couleur du texte */
+        font-size: 16px; /* Taille de la police */
+        margin-top: 5px; /* Espacement au-dessus du paragraphe */
+        line-height: 1.5; /* Hauteur de ligne pour un meilleur espacement */
+    }
+</style>
+
+            
+            <div class="tag">
+                <h1>Quick Link</h1>
+                <a href="#">Home</a>
+                <a href="#about">About</a>
+                <a href="#featured">Featured</a>
+                <a href="#arrivals">Arrivals</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#blog">Blog</a>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Contact Info</h1>
+                <a href="#"><i class="fa-solid fa-phone"></i>0655430038</a>
+                <a href="#"><i class="fa-solid fa-phone"></i>0522334455</a>
+                <a href="#"><i class="fa-solid fa-envelope"></i>support@ebookstore.com</a>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Follow Us</h1>
+                <div class="social_link">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </div>
+                
+            </div>
+
+            <div class="tag">
+                <h1>Newsletter</h1>
+                <div class="search_bar">
+                    <input type="text" placeholder="You email id here">
+                    <button type="submit">Subscribe</button>
+                </div>                
+            </div>            
+            
+        </div>
+
+        <p class="end"><span>&copy; 2024 E-Book Store. Tous droits réservés.</span></p>
+
+    </footer>
+
+
+
+
+
+    
+</body>
+</html>
