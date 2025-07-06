@@ -18,7 +18,7 @@ Projet académique visant à simuler une plateforme e-commerce moderne.
 - JavaScript ES6
 - Fichiers JSON pour la gestion des données livres
 - Git + GitHub pour le versioning
-- (Prévu) Serveur local en Node.js ou Express pour l'API
+- (Prévu) Serveur local en Node.js pour l'API
 
 ## 👤 Auteur
 
